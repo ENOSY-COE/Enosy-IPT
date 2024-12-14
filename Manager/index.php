@@ -27,7 +27,7 @@ include 'database_connection.php';
     />
     <meta
       name="description"
-      content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework"
+      content="Matrix Admin Lite Freennnnnnnnnn Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework"
     />
     <meta name="robots" content="noindex,nofollow" />
     <title>TERA</title>
