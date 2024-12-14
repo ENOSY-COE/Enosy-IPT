@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>TERATECH</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/TERA.jpeg" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+<style>
+  .sitename{
+    border-style: solid;
+    font-size: 20px;
+    border-color: red;
+  }
+</style>
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.php" class="logo d-flex align-items-center">
+         
+        <img src="assets/img/TERA.jpeg" alt="">
+     
+        <h1 class="sitename">TERA-IPTS </h1>
+        
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.php">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#" class="active">Projects</a></li>
+          <li><a href="requests.php">IPT POSITION</a></li>
+          
+          <li><a href="contact.html">Contact</a></li>
+          <li class="dropdown"><a href="#"><span>IPT Request</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+           
+           <li class="nav-item"> <a class="nav-link active" href="login.php">IPTS-Login <span class="sr-only"></span></a> </li>
+           </ul>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+    </div>
+
+  </header>
+
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
+
+      <div class="info d-flex align-items-center">
+        <div class="container">
+          <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-lg-6 text-center">
+              <h1>Welcome to TERA TECHNOLOGY AND ENGINEERING LTD</h1>
+              <p>TERA-IPTS (Industrial Practical Training System)  Is the system that manages and monitor Students during their practical training in Organisation.</p>
+              <a href="#get-started" class="btn-get-started">IPT REQUEST</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+
+        <div class="carousel-item">
+          <img src="assets/img/net1.jpeg" alt="">
+        </div>
+
+        <div class="carousel-item active">
+          <img src="assets/img/net2.jpeg" alt="">
+        </div>
+
+        <div class="carousel-item">
+          <img src="assets/img/net3.jpeg" alt="">
+        </div>
+
+        <div class="carousel-item">
+          <img src="assets/img/net1.jpeg" alt="">
+        </div>
+
+        <div class="carousel-item">
+          <img src="assets/img/serva.jpg" alt="">
+        </div>
+
+        <div class="carousel-item">
+          <img src="assets/img/p2.jpg" alt="">
+        </div>
+
+        <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+        </a>
+
+        <a class="carousel-control-next" href="#hero-carousel" role="button" data-bs-slide="next">
+          <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+        </a>
+
+      </div>
+
+    </section><!-- /Hero Section -->
+
+    <!-- Get Started Section -->
+    <section id="get-started" class="get-started section">
+    <?php
+require 'database_connection.php'; // Include your PDO database connection
+
+try {
+    // Prepare the SQL query to fetch job details
+    $stmt = $connect->prepare("SELECT * FROM job");
+    
+    // Execute the query
+    $stmt->execute();
+    
+    // Fetch all the results
+    $jobs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Check if there are any jobs
+    if ($jobs) {
+        echo "<div class='container mt-5'>";
+        echo "<div class='row'>";
+        foreach ($jobs as $job) {
+            echo "<div class='col-md-4 mb-4'>";
+            echo "<div class='card h-100'>";
+            echo "<img src='Manager/uploads/" . htmlspecialchars($job['image_path']) . "' class='card-img-top' alt='Job Image'>";
+            echo "<div class='card-body'>";
+            echo "<h5 class='card-title'>" . htmlspecialchars($job['job_title']) . "</h5>";
+            echo "<p class='card-text'><strong>Description:</strong> " . htmlspecialchars($job['job_description']) . "</p>";
+            echo "<p class='card-text'><strong>Location:</strong> " . htmlspecialchars($job['job_location']) . "</p>";
+            echo "<p class='card-text'><strong>Job Type:</strong> " . htmlspecialchars($job['job_type']) . "</p>";
+            echo "<p class='card-text'><strong>Department:</strong> " . htmlspecialchars($job['department']) . "</p>";
+            echo "<p class='card-text'><strong>Date Posted:</strong> " . htmlspecialchars($job['date_posted']) . "</p>";
+            echo "</div>";
+            echo "<div class='card-footer text-center'>";
+            echo "<form method='POST' action='request_job.php'>";
+            echo "<input type='hidden' name='job_id' value='" . $job['job_id'] . "'>";
+            echo "<button type='submit' class='btn btn-primary'><a href='request_job.php?job_id=".$job['job_id']."'>Request Job</a></button>";
+            echo "</form>";
+            echo "</div>";
+            echo "</div>"; // Close card
+            echo "</div>"; // Close col-md-4
+        }
+        echo "</div>"; // Close row
+        echo "</div>"; // Close container
+    } else {
+        echo "<div class='container mt-5'>";
+        echo "<p class='text-center'>No jobs available.</p>";
+        echo "</div>";
+    }
+} catch (PDOException $e) {
+    // Handle any errors
+    echo "<div class='container mt-5'>";
+    echo "<p class='text-center text-danger'>Error: " . $e->getMessage() . "</p>";
+    echo "</div>";
+}
+?>
+
+
+    </section><!-- /Get Started Section -->
+
+    <!-- new section-->
+    <section id="constructions" class="constructions section">
+  
+    
+
+    </section><!-- add any content -->
+
+    <!-- Services Section -->
+    <section id="services" class="services section light-background">
+
+    
+</section>
+<footer>
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="sitenam">teratech</strong> <span>All Rights Reserved</span></p>
+      <div class="credits">
+      
+        Designed by <a href="#">teratech.co.tz</a>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
